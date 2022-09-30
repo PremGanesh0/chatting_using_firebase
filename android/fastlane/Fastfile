@@ -1,0 +1,23 @@
+# 
+
+default_platform(:android)
+
+BUILD_NUMBER = ENV["BUILD_NUMBER"]
+
+platform :android do
+  desc "Deploy a new beta"
+    gradle(
+      task: 'assemble',
+      build_type: 'Release'
+  )
+  lane :android_beta_app do
+      firebase_app_distribution(
+          app: '1:969315233418:android:96e645e2121cd7c439c773',
+          groups: "testers",
+          release_notes: BUILD_NUMBER,
+          firebase_cli_path: "/usr/local/bin/firebase",
+          firebase_cli_token: '1//0gr6CnWB8h5TpCgYIARAAGBASNwF-L9IrNh9sxcG3d8p7_Wz20BE1LAkVgfcl-2petSkvrmxNBhpq8NGx-2rDtxVb_dYVnsAurYU',
+          apk_path: "../build/app/outputs/apk/release/app-release.apk"
+      )
+  end
+end

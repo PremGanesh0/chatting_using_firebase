@@ -1,0 +1,108 @@
+
+
+
+2021 push notification explained in detailed 
+
+
+https://www.youtube.com/watch?v=p7aIZ3aEi2w&ab_channel=EasyApproach
+
+
+
+Open x-code take bunle identifer place in 
+register app in firebase
+download goolge sevices plist
+ place it in the Runner Folder
+
+
+07-22
+
+
+
+
+//--------------------------------------------GMAIL SIGNIN DATA ----------------------------------------------------//
+UserCredential(
+            additionalUserInfo:
+                        AdditionalUserInfo(
+
+		                                 isNewUser: false,
+                                                    profile:{
+                                                    given_name: Krify,
+                                                    locale: en, 
+                                                    family_name: Soft, 
+                                                    picture: https://lh3.googleusercontent.com/a/AATXAJyCBYwR5Fw03XJodGCFebo49OiQFaQaF_rtSVlU=s96-c,
+                                                    aud: 969315233418-llc43trn9sgkv3tlr400paebfcbdele7.apps.googleusercontent.com,
+                                                    azp: 969315233418-s3l8e7r6q7fpehgamtfn5q2pmdn2db9d.apps.googleusercontent.com, 
+                                                    exp: 1651123495, 
+                                                    iat: 1651119895,
+                                                    iss: https://accounts.google.com, 
+                                                    sub: 113271793136349083735,
+                                                    name: Krify Soft,
+                                                    email: testkrify@gmail.com, 
+                                                    email_verified: true
+                                                    },
+                                        providerId: google.com,
+                                        username: null
+                                        ),
+
+
+                        credential: AuthCredential(
+                                    providerId: google.com, 
+                                    signInMethod: google.com,
+                                    token: null),
+
+
+                        user: User(
+                                displayName: Krify Soft, 
+                                email: testkrify@gmail.com,
+                                emailVerified: true,
+                                isAnonymous: false, 
+                                metadata: UserMetadata(
+                                                        creationTime: 2022-04-28 09:43:41.441,
+                                                        lastSignInTime: 2022-04-28 10:15:08.071
+                                                        ), 
+                                phoneNumber: null, 
+                                photoURL: https://lh3.googleusercontent.com/a/AATXAJyCBYwR5Fw03XJodGCFebo49OiQFaQaF_rtSVlU=s96-c,    
+                                providerData:[
+                                UserInfo(
+                                   
+                                    displayName: Krify Soft,
+                                    email: testkrify@gmail.com, 
+                                    phoneNumber: null,
+                                    photoURL: https://lh3.googleusercontent.com/a/AATXAJyCBYwR5Fw03XJodGCFebo49OiQFaQaF_rtSVlU=s96-c,
+                                    providerId: google.com,
+                                    uid: 113271793136349083735)
+                                        ], 
+                                        refreshToken: ,
+                                        tenantId: null, 
+                                        uid: MovCH4Xxw9QVlOMcSrKsIU5bHjX2)
+)
+
+
+FirebaseFirestore.instance.colection("Collection Name/document name/collection").doc().collecion().doc.get();
+//--------------------------------------------GMAIL SIGNIN DATA ----------------------------------------------------//
+
+
+
+func readTimestamp(timestamp: Int) {
+    let now = Date()
+    let dateFormatter = DateFormatter()
+    let date = Date(timeIntervalSince1970: Double(timestamp))
+    let components = Set<Calendar.Component>([.second, .minute, .hour, .day, .weekOfMonth])
+    let diff = Calendar.current.dateComponents(components, from: date, to: now)
+    var timeText = ""
+
+    dateFormatter.locale = .current
+    dateFormatter.dateFormat = "HH:mm a"
+
+    if diff.second! <= 0 || diff.second! > 0 && diff.minute! == 0 || diff.minute! > 0 && diff.hour! == 0 || diff.hour! > 0 && diff.day! == 0 {
+        timeText = dateFormatter.string(from: date)
+    }
+    if diff.day! > 0 && diff.weekOfMonth! == 0 {
+        timeText = (diff.day == 1) ? "\(diff.day!) DAY AGO" : "\(diff.day!) DAYS AGO"
+    }
+    if diff.weekOfMonth! > 0 {
+        timeText = (diff.weekOfMonth == 1) ? "\(diff.weekOfMonth!) WEEK AGO" : "\(diff.weekOfMonth!) WEEKS AGO"
+    }
+
+    return timeText
+}
